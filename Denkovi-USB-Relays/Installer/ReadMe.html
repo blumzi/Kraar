@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <center><h1>Denkovi 8Relay USB Switch driver</h1></center>
+    <center>
+        <b><a href="http://www.weizmann.ac.il/particle/kraar/home">The Martin S. Kraar Observatory</a></b>
+        <br />
+        <br />Particle Physics and Astrophysics
+        <br />
+        <br />Weizmann Institute of Science
+        <br />Rehovot, Israel
+        <br />
+        <br />Arie Blumenzweig<address>blumzi@013.net</address>
+    </center>
+  
+
+    <h2>Abstract.</h2>
+    <p> This is an ASCOM Dome driver for the 8 relays USB switch by Denkovi, at the Kraar Observatory.</p>
+
+    <h2>Hardware</h2>
+    A board with 8 solid state relays, with USB interface, by Denkovi.
+
+    <h2>Software</h2>
+    <p>The driver supports a single USB-attached card.  The FTDI Id of the card can be set in the driver's Setup window.  It defaults to zero.</p>
+    <p>A set of eight labels can be entered via the Setup window</p>
+
+    <h2>Relays state persistance</h2>
+    <p>The Setup window has a checkbox for relay value persistence.  If it is checked (default):</p>
+    <ul>
+        <li>Every five seconds the driver queries the card for the relays state. If a valid value is received, the driver saves it in the ASCOM profile.  This ensures that relay state changes performed through other interfaces will be preserved as well.</li>
+        <li>If a valid state is saved in the ASCOM profile, the driver enforces it onto the card at Connect time</li>
+    </ul>
+    <p>If the checkbox is not checked, no relay state persistance will be maintained.</p>
+
+    <h3>ASCOM Compliance</h3>
+    <p>The driver passes the ASCOM 6.2 Compliance test.</p>
+</body>
+</html>
