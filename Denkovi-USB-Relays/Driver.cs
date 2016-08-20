@@ -85,10 +85,10 @@ namespace ASCOM.DenkoviUSB
         /// Private variable to hold the connected state
         /// </summary>
         private bool _connected;
-        private System.Windows.Forms.Timer statusTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer relaysStateTimer = new System.Windows.Forms.Timer();
 
-        public static string[] Labels;
-        private int ftdiState = -1;
+        public static string[] relayLabels;
+        private int relaysState = -1;
 
         internal static string persistantRelaysProfileName = "Save and restore relays state";
         private bool persistantRelays = true;
@@ -98,10 +98,8 @@ namespace ASCOM.DenkoviUSB
         /// </summary>
         private TraceLogger tl;
 
-        public FTDI _ftdi = new FTDI();
+        public FTDI _device = new FTDI();
         FTDI.FT_STATUS ftdiStatus;
-        //byte[] sentBytes = new byte[2];
-        //uint receivedBytes;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DenkoviUSB"/> class.
@@ -113,7 +111,7 @@ namespace ASCOM.DenkoviUSB
             tl.Enabled = traceState;
             tl.LogMessage("Switch", "Starting initialisation");
 
-            Labels = new string[numSwitch];
+            relayLabels = new string[numSwitch];
             ReadProfile(); // Read device configuration from the ASCOM Profile store
 
             _connected = false; // Initialise connected to false
@@ -210,17 +208,17 @@ namespace ASCOM.DenkoviUSB
             uint nbytes = 0;
 
 
-            ftdiState = -1;
+            relaysState = -1;
             try
             {
-                _ftdi.Write(obuf, obuf.Length, ref nbytes);
+                _device.Write(obuf, obuf.Length, ref nbytes);
                 if (nbytes != obuf.Length)
                     throw new InvalidOperationException(string.Format("Could not write \"ask//\" to FTDI{0}", ftdiIndex));
                 System.Threading.Thread.Sleep(10);
-                _ftdi.Read(ibuf, (uint)ibuf.Length, ref nbytes);
+                _device.Read(ibuf, (uint)ibuf.Length, ref nbytes);
                 if (nbytes != ibuf.Length)
                     throw new InvalidOperationException(string.Format("Could not read from FTDI{0}", ftdiIndex));
-                ftdiState = (ibuf[1] << 8) | ibuf[0];
+                relaysState = (ibuf[1] << 8) | ibuf[0];
                 return true;
             } catch
             {
@@ -236,7 +234,7 @@ namespace ASCOM.DenkoviUSB
             using (Profile driverProfile = new Profile())
             {
                 driverProfile.DeviceType = "Switch";
-                driverProfile.WriteValue(driverID, "State", ftdiState.ToString());
+                driverProfile.WriteValue(driverID, "State", relaysState.ToString());
             }
         }
 
@@ -258,30 +256,30 @@ namespace ASCOM.DenkoviUSB
                     _connected = true;
                     tl.LogMessage("Connected Set", "Connecting to FTDI " + ftdiIndex);
                     
-                    _ftdi = new FTDI();
-                    ftdiStatus = _ftdi.OpenByIndex(ftdiIndex);
+                    _device = new FTDI();
+                    ftdiStatus = _device.OpenByIndex(ftdiIndex);
                     if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot OpenByIndex{0} FTDI{0}.", ftdiIndex));
 
-                    ftdiStatus = _ftdi.SetBaudRate(921600);
+                    ftdiStatus = _device.SetBaudRate(921600);
                     if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot SetBaudRate(921600) on FTDI{0}.", ftdiIndex));
 
-                    ftdiStatus = _ftdi.SetBitMode(255, 4);
+                    ftdiStatus = _device.SetBitMode(255, 4);
                     if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot SetBitMode(255, 4) on FTDI{0}.", ftdiIndex));
 
                     if (persistantRelays)
                     {
-                        if (ftdiState != -1)
+                        if (relaysState != -1)
                         {
                             for (short i = 0; i < 8; i++)
                             {
-                                SetSwitch(i, (ftdiState & (1 << i)) == 0 ? false : true);
+                                SetSwitch(i, (relaysState & (1 << i)) == 0 ? false : true);
                             }
                         }
-                        statusTimer.Interval = 5000;
-                        statusTimer.Tick += StatusTimer_Tick;
+                        relaysStateTimer.Interval = 5000;
+                        relaysStateTimer.Tick += StatusTimer_Tick;
                     }
                 }
                 else
@@ -289,7 +287,7 @@ namespace ASCOM.DenkoviUSB
                     _connected = false;
                     tl.LogMessage("Connected Set", "Disconnecting from FTDI" + ftdiIndex);
                     
-                    ftdiStatus = _ftdi.Close();
+                    ftdiStatus = _device.Close();
                     if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot Close() FTDI{0}.", ftdiIndex));
                 }
@@ -376,8 +374,8 @@ namespace ASCOM.DenkoviUSB
         public string GetSwitchName(short id)
         {
             Validate("GetSwitchName", id);
-            tl.LogMessage("GetSwitchName", string.Format("GetSwitchName({0}) - {0}", Labels[id]));
-            return Labels[id];
+            tl.LogMessage("GetSwitchName", string.Format("GetSwitchName({0}) - {0}", relayLabels[id]));
+            return relayLabels[id];
         }
 
         /// <summary>
@@ -388,7 +386,7 @@ namespace ASCOM.DenkoviUSB
         public void SetSwitchName(short id, string name)
         {
             Validate("SetSwitchName", id);
-            Labels[id] = name;
+            relayLabels[id] = name;
             tl.LogMessage("SetSwitchName", string.Format("SetSwitchName({0}) = {1}", id, name));
         }
 
@@ -438,7 +436,7 @@ namespace ASCOM.DenkoviUSB
             if (!AskForStatus())
                 throw new InvalidOperationException("Cannot get relays status");
 
-            return ((ftdiState & (1 << id)) == 0) ? false : true;
+            return ((relaysState & (1 << id)) == 0) ? false : true;
         }
 
         /// <summary>
@@ -464,11 +462,11 @@ namespace ASCOM.DenkoviUSB
             byte[] obuf = Encoding.ASCII.GetBytes(cmd);
             byte[] answer = new byte[5];
 
-            _ftdi.Write(obuf, obuf.Length, ref nbytes);
+            _device.Write(obuf, obuf.Length, ref nbytes);
             if (nbytes != obuf.Length)
                 throw new InvalidOperationException(string.Format("Could not send \"{0}\" to FTDI{1}", cmd, ftdiIndex));
             System.Threading.Thread.Sleep(10);
-            _ftdi.Read(answer, (uint)answer.Length, ref nbytes);
+            _device.Read(answer, (uint)answer.Length, ref nbytes);
             if (nbytes != answer.Length)
                 throw new InvalidOperationException(string.Format("Could not read from FTDI{0}", ftdiIndex));
             if (answer != obuf)
@@ -735,9 +733,9 @@ namespace ASCOM.DenkoviUSB
                 ftdiIndex = Convert.ToUInt32(driverProfile.GetValue(driverID, ftdiIndexProfileName, string.Empty, ftdiIndexDefault));
                 for (int i = 0; i < MaxSwitch; i++)
                 {
-                    Labels[i] = driverProfile.GetValue(driverID, "Labels", i.ToString(), "Relay" + i.ToString());
+                    relayLabels[i] = driverProfile.GetValue(driverID, "Labels", i.ToString(), "Relay" + i.ToString());
                 }
-                ftdiState = Convert.ToUInt16(driverProfile.GetValue(driverID, "State", string.Empty, "-1"));
+                relaysState = Convert.ToInt16(driverProfile.GetValue(driverID, "State", string.Empty, "-1"));
                 persistantRelays = Convert.ToBoolean(driverProfile.GetValue(driverID, persistantRelaysProfileName, string.Empty, true.ToString()));
             }
         }
@@ -753,15 +751,15 @@ namespace ASCOM.DenkoviUSB
                 driverProfile.WriteValue(driverID, traceStateProfileName, traceState.ToString());
                 driverProfile.WriteValue(driverID, ftdiIndexProfileName, ftdiIndex.ToString());
                 for (int i = 0; i < MaxSwitch; i++)
-                    driverProfile.WriteValue(driverID, "Labels", Labels[i], i.ToString());
-                driverProfile.WriteValue(driverID, "State", ftdiState.ToString());
+                    driverProfile.WriteValue(driverID, "Labels", relayLabels[i], i.ToString());
+                driverProfile.WriteValue(driverID, "State", relaysState.ToString());
                 driverProfile.WriteValue(driverID, persistantRelaysProfileName, persistantRelays.ToString());
             }
         }
 
         public static void SetLabel(int i, string text)
         {
-            Labels[i] = text;
+            relayLabels[i] = text;
         }
 
         #endregion

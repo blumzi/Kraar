@@ -60,7 +60,6 @@ namespace ASCOM.DenkoviUSB
             Switch s = new Switch();
 
             chkTrace.Checked = Switch.traceState;
-            // set the list of com ports to those that are currently available
             textBoxFtdiIndex.Text = Switch.ftdiIndex.ToString();
 
             using (Profile driverProfile = new Profile())
@@ -79,7 +78,7 @@ namespace ASCOM.DenkoviUSB
             TextBox tb = sender as TextBox;
 
             if (tb.Text == string.Empty)
-                tb.Text = string.Format("Relay{0}", tb.Tag);
+                tb.Text = string.Format("Relay{0}", tb.Name.Substring(tb.Name.Length - 1));
         }
     }
 }

@@ -154,7 +154,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>"C:\Program Files (x86)\Inno Setup 5\ISCC.exe"  /O"$(SolutionDir)\Deliveries" "$(ProjectDir)\Installer\DenkoviUSB Setup.iss"
-move "$(SolutionDir)\Deliveries\DenkoviUSB Setup.exe" "$(SolutionDir)\Deliveries\DenkoviUSB Setup.exe.arie"</PostBuildEvent>
+@echo.
+@cd "$(SolutionDir)\Deliveries"
+@echo move "DenkoviUSB Setup.exe" "DenkoviUSB Setup.exe.arie"
+move "DenkoviUSB Setup.exe" "DenkoviUSB Setup.exe.arie"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

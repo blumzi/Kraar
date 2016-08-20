@@ -62,7 +62,7 @@ namespace ASCOM.DenkoviUSB
             // 
             this.cmdOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.cmdOK.Location = new System.Drawing.Point(381, 267);
+            this.cmdOK.Location = new System.Drawing.Point(381, 279);
             this.cmdOK.Name = "cmdOK";
             this.cmdOK.Size = new System.Drawing.Size(59, 24);
             this.cmdOK.TabIndex = 0;
@@ -74,7 +74,7 @@ namespace ASCOM.DenkoviUSB
             // 
             this.cmdCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cmdCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cmdCancel.Location = new System.Drawing.Point(381, 297);
+            this.cmdCancel.Location = new System.Drawing.Point(381, 309);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(59, 25);
             this.cmdCancel.TabIndex = 1;
@@ -117,7 +117,7 @@ namespace ASCOM.DenkoviUSB
             // chkTrace
             // 
             this.chkTrace.AutoSize = true;
-            this.chkTrace.Location = new System.Drawing.Point(24, 296);
+            this.chkTrace.Location = new System.Drawing.Point(24, 320);
             this.chkTrace.Name = "chkTrace";
             this.chkTrace.Size = new System.Drawing.Size(69, 17);
             this.chkTrace.TabIndex = 6;
@@ -134,7 +134,7 @@ namespace ASCOM.DenkoviUSB
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 102);
+            this.label3.Location = new System.Drawing.Point(24, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 8;
@@ -142,6 +142,8 @@ namespace ASCOM.DenkoviUSB
             // 
             // tableLayoutPanelLabels
             // 
+            this.tableLayoutPanelLabels.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanelLabels.ColumnCount = 2;
             this.tableLayoutPanelLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -174,7 +176,7 @@ namespace ASCOM.DenkoviUSB
             this.tableLayoutPanelLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanelLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanelLabels.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanelLabels.Size = new System.Drawing.Size(344, 152);
+            this.tableLayoutPanelLabels.Size = new System.Drawing.Size(344, 164);
             this.tableLayoutPanelLabels.TabIndex = 9;
             // 
             // textBoxLabel7
@@ -182,7 +184,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel7.Location = new System.Drawing.Point(49, 136);
+            this.textBoxLabel7.Location = new System.Drawing.Point(49, 143);
             this.textBoxLabel7.Name = "textBoxLabel7";
             this.textBoxLabel7.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel7.TabIndex = 17;
@@ -194,7 +196,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel6.Location = new System.Drawing.Point(49, 117);
+            this.textBoxLabel6.Location = new System.Drawing.Point(49, 123);
             this.textBoxLabel6.Name = "textBoxLabel6";
             this.textBoxLabel6.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel6.TabIndex = 16;
@@ -206,7 +208,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel5.Location = new System.Drawing.Point(49, 98);
+            this.textBoxLabel5.Location = new System.Drawing.Point(49, 103);
             this.textBoxLabel5.Name = "textBoxLabel5";
             this.textBoxLabel5.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel5.TabIndex = 15;
@@ -218,7 +220,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel4.Location = new System.Drawing.Point(49, 79);
+            this.textBoxLabel4.Location = new System.Drawing.Point(49, 83);
             this.textBoxLabel4.Name = "textBoxLabel4";
             this.textBoxLabel4.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel4.TabIndex = 14;
@@ -230,7 +232,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel3.Location = new System.Drawing.Point(49, 60);
+            this.textBoxLabel3.Location = new System.Drawing.Point(49, 63);
             this.textBoxLabel3.Name = "textBoxLabel3";
             this.textBoxLabel3.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel3.TabIndex = 13;
@@ -242,7 +244,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel2.Location = new System.Drawing.Point(49, 41);
+            this.textBoxLabel2.Location = new System.Drawing.Point(49, 43);
             this.textBoxLabel2.Name = "textBoxLabel2";
             this.textBoxLabel2.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel2.TabIndex = 12;
@@ -254,7 +256,7 @@ namespace ASCOM.DenkoviUSB
             this.textBoxLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLabel1.Location = new System.Drawing.Point(49, 22);
+            this.textBoxLabel1.Location = new System.Drawing.Point(49, 23);
             this.textBoxLabel1.Name = "textBoxLabel1";
             this.textBoxLabel1.Size = new System.Drawing.Size(292, 20);
             this.textBoxLabel1.TabIndex = 11;
@@ -280,9 +282,9 @@ namespace ASCOM.DenkoviUSB
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 19);
+            this.label4.Size = new System.Drawing.Size(40, 20);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Relay1";
+            this.label4.Text = "Relay0";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
@@ -290,11 +292,11 @@ namespace ASCOM.DenkoviUSB
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 19);
+            this.label5.Location = new System.Drawing.Point(3, 20);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 19);
+            this.label5.Size = new System.Drawing.Size(40, 20);
             this.label5.TabIndex = 1;
-            this.label5.Text = "Relay2";
+            this.label5.Text = "Relay1";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
@@ -302,11 +304,11 @@ namespace ASCOM.DenkoviUSB
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 38);
+            this.label6.Location = new System.Drawing.Point(3, 40);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(40, 19);
+            this.label6.Size = new System.Drawing.Size(40, 20);
             this.label6.TabIndex = 2;
-            this.label6.Text = "Relay3";
+            this.label6.Text = "Relay2";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label7
@@ -314,11 +316,11 @@ namespace ASCOM.DenkoviUSB
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 57);
+            this.label7.Location = new System.Drawing.Point(3, 60);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 19);
+            this.label7.Size = new System.Drawing.Size(40, 20);
             this.label7.TabIndex = 3;
-            this.label7.Text = "Relay4";
+            this.label7.Text = "Relay3";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label9
@@ -326,11 +328,11 @@ namespace ASCOM.DenkoviUSB
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 95);
+            this.label9.Location = new System.Drawing.Point(3, 100);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 19);
+            this.label9.Size = new System.Drawing.Size(40, 20);
             this.label9.TabIndex = 5;
-            this.label9.Text = "Relay6";
+            this.label9.Text = "Relay5";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label10
@@ -338,11 +340,11 @@ namespace ASCOM.DenkoviUSB
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 114);
+            this.label10.Location = new System.Drawing.Point(3, 120);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 19);
+            this.label10.Size = new System.Drawing.Size(40, 20);
             this.label10.TabIndex = 6;
-            this.label10.Text = "Relay7";
+            this.label10.Text = "Relay6";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label11
@@ -350,11 +352,11 @@ namespace ASCOM.DenkoviUSB
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 133);
+            this.label11.Location = new System.Drawing.Point(3, 140);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 19);
+            this.label11.Size = new System.Drawing.Size(40, 24);
             this.label11.TabIndex = 7;
-            this.label11.Text = "Relay8";
+            this.label11.Text = "Relay7";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label8
@@ -362,11 +364,11 @@ namespace ASCOM.DenkoviUSB
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 76);
+            this.label8.Location = new System.Drawing.Point(3, 80);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 19);
+            this.label8.Size = new System.Drawing.Size(40, 20);
             this.label8.TabIndex = 4;
-            this.label8.Text = "Relay5";
+            this.label8.Text = "Relay4";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // checkBoxPersistance
@@ -385,7 +387,7 @@ namespace ASCOM.DenkoviUSB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 330);
+            this.ClientSize = new System.Drawing.Size(450, 342);
             this.Controls.Add(this.checkBoxPersistance);
             this.Controls.Add(this.tableLayoutPanelLabels);
             this.Controls.Add(this.label3);
