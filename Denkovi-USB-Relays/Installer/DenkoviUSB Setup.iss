@@ -4,7 +4,7 @@
 ;
 [Setup]
 AppID={{f86848a3-b655-4564-aa8a-013046f82a88}
-AppName=ASCOM Wise40 Dome Driver
+AppName=ASCOM DenkoviUSB Driver
 AppVerName=ASCOM DenkoviUSB Switch Driver 6.2.0.0
 AppVersion=6.2.0.0
 AppPublisher=Arie Blumenzweig <blumzi@013.net>
@@ -52,7 +52,7 @@ Filename: "{dotnet4064}\regasm.exe"; Parameters: "/codebase ""{app}\ASCOM.Denkov
 ; Only if driver is .NET
 [UninstallRun]
 ; Only for .NET assembly/in-proc drivers
-Filename: "{dotnet4032}\regasm.exe"; Parameters: "-u ""{app}\ASCOM.Wise40.Dome.dll"""; Flags: runhidden 32bit
+Filename: "{dotnet4032}\regasm.exe"; Parameters: "-u ""{app}\ASCOM.DenkoviUSB.Switch.dll"""; Flags: runhidden 32bit
 ; This helps to give a clean uninstall
 Filename: "{dotnet4064}\regasm.exe"; Parameters: "/codebase ""{app}\ASCOM.DenkoviUSB.Switch.dll"""; Flags: runhidden 64bit; Check: IsWin64
 Filename: "{dotnet4064}\regasm.exe"; Parameters: "-u ""{app}\ASCOM.DenkoviUSB.Switch.dll"""; Flags: runhidden 64bit; Check: IsWin64
