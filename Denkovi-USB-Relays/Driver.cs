@@ -4,20 +4,20 @@
 //
 // ASCOM Switch driver for DenkoviUSB
 //
-// Description:	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
-//				nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam 
-//				erat, sed diam voluptua. At vero eos et accusam et justo duo 
-//				dolores et ea rebum. Stet clita kasd gubergren, no sea takimata 
-//				sanctus est Lorem ipsum dolor sit amet.
+// Description:	Supports a single 8-Relay Denkovi board with USB interface.
+//              The relay labels can be defined at Setup time, the are kept in the ASCOM profile.
+//              The driver can (optionally) monitor the status of the relays and save it in the profile.
+//                If such monitoring is enabled (via Setup), the last known-as-good state will be enforced
+//                onto the board at Connect time.
 //
-// Implements:	ASCOM Switch interface version: <To be completed by driver developer>
-// Author:		(XXX) Your N. Here <your@email.here>
+// Implements:	ASCOM Switch interface version: 6.2
+// Author:		(AB) Arie Blumenzweig <blumzi@013.net>
 //
 // Edit Log:
 //
 // Date			Who	Vers	Description
 // -----------	---	-----	-------------------------------------------------------
-// dd-mmm-yyyy	XXX	6.0.0	Initial edit, created from ASCOM driver template
+// 20-Aug-2016	AB 	6.0.0	Initial edit, created from ASCOM driver template
 // --------------------------------------------------------------------------------
 //
 
@@ -67,11 +67,10 @@ namespace ASCOM.DenkoviUSB
         /// The DeviceID is used by ASCOM applications to load the driver at runtime.
         /// </summary>
         internal static string driverID = "ASCOM.DenkoviUSB.Switch";
-        // TODO Change the descriptive string for your driver then remove this line
         /// <summary>
         /// Driver description that displays in the ASCOM Chooser.
         /// </summary>
-        private static string driverDescription = "ASCOM Switch Driver for DenkoviUSB.";
+        private static string driverDescription = "ASCOM Switch Driver for an 8-Relay DenkoviUSB board.";
 
         internal static string ftdiIndexProfileName = "FTDI Index"; // Constants used for Profile persistence
         internal static string ftdiIndexDefault = "0";
@@ -99,7 +98,6 @@ namespace ASCOM.DenkoviUSB
         private TraceLogger tl;
 
         public FTDI _device = new FTDI();
-        FTDI.FT_STATUS ftdiStatus;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DenkoviUSB"/> class.
@@ -167,7 +165,7 @@ namespace ASCOM.DenkoviUSB
         {
             CheckConnected("CommandBlind");
             // Call CommandString and return as soon as it finishes
-            this.CommandString(command, raw);
+            //this.CommandString(command, raw);
             // or
             throw new ASCOM.MethodNotImplementedException("CommandBlind");
             // DO NOT have both these sections!  One or the other
@@ -176,7 +174,7 @@ namespace ASCOM.DenkoviUSB
         public bool CommandBool(string command, bool raw)
         {
             CheckConnected("CommandBool");
-            string ret = CommandString(command, raw);
+            //string ret = CommandString(command, raw);
             // TODO decode the return string and return true or false
             // or
             throw new ASCOM.MethodNotImplementedException("CommandBool");
@@ -247,6 +245,8 @@ namespace ASCOM.DenkoviUSB
             }
             set
             {
+                FTDI.FT_STATUS status;
+
                 tl.LogMessage("Connected Set", value.ToString());
                 if (value == IsConnected)
                     return;
@@ -257,16 +257,16 @@ namespace ASCOM.DenkoviUSB
                     tl.LogMessage("Connected Set", "Connecting to FTDI " + ftdiIndex);
                     
                     _device = new FTDI();
-                    ftdiStatus = _device.OpenByIndex(ftdiIndex);
-                    if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
+                    status = _device.OpenByIndex(ftdiIndex);
+                    if (status != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot OpenByIndex{0} FTDI{0}.", ftdiIndex));
 
-                    ftdiStatus = _device.SetBaudRate(921600);
-                    if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
+                    status = _device.SetBaudRate(921600);
+                    if (status != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot SetBaudRate(921600) on FTDI{0}.", ftdiIndex));
 
-                    ftdiStatus = _device.SetBitMode(255, 4);
-                    if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
+                    status = _device.SetBitMode(255, 4);
+                    if (status != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot SetBitMode(255, 4) on FTDI{0}.", ftdiIndex));
 
                     if (persistantRelays)
@@ -287,8 +287,8 @@ namespace ASCOM.DenkoviUSB
                     _connected = false;
                     tl.LogMessage("Connected Set", "Disconnecting from FTDI" + ftdiIndex);
                     
-                    ftdiStatus = _device.Close();
-                    if (ftdiStatus != FTDI.FT_STATUS.FT_OK)
+                    status = _device.Close();
+                    if (status != FTDI.FT_STATUS.FT_OK)
                         throw new InvalidOperationException(string.Format("Cannot Close() FTDI{0}.", ftdiIndex));
                 }
             }
@@ -489,9 +489,6 @@ namespace ASCOM.DenkoviUSB
             Validate("MaxSwitchValue", id);
             // boolean switch implementation:
             return 1;
-            // or
-            //tl.LogMessage("MaxSwitchValue", string.Format("MaxSwitchValue({0}) - not implemented", id));
-            //throw new MethodNotImplementedException("MaxSwitchValue");
         }
 
         /// <summary>
@@ -505,9 +502,6 @@ namespace ASCOM.DenkoviUSB
             Validate("MinSwitchValue", id);
             // boolean switch implementation:
             return 0;
-            // or
-            //tl.LogMessage("MinSwitchValue", string.Format("MinSwitchValue({0}) - not implemented", id));
-            //throw new MethodNotImplementedException("MinSwitchValue");
         }
 
         /// <summary>
